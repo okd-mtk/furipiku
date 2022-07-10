@@ -1,24 +1,29 @@
-# README
+## サイト概要
+### サイトテーマ
+<イラスト×レビューサイト>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### テーマを選んだ理由
+<ユーザーがイラストを投稿してそれをたくさんのユーザーが評価するため>
 
-Things you may want to cover:
+### ターゲットユーザ
+<イラストを投稿する（描く）ユーザーと見るユーザー>
 
-* Ruby version
+### 主な利用シーン
+<たくさんのイラストをファンの間で共有する>
 
-* System dependencies
+## 設計書
+<UI Flows-- https://drive.google.com/file/d/1hojKV822p7LPTo8pkuKkXl-C7Q6UgEAV/view?usp=sharing >
+<ER図-- https://drive.google.com/file/d/13KMfb8uiI6A5I_yf-SLBX7NR0sc4nOZq/view?usp=sharing >
+<テーブル定義書-- https://docs.google.com/spreadsheets/d/19vHZCoc6GtMPZl4Za_T66bMutDkV4YAzmIhfiDcShNY/edit?usp=sharing >
+<アプリケーション詳細設計 -- https://docs.google.com/spreadsheets/d/1lfIYgPNBHUeN4M0cGI-qGjBPOf4ZDJZ5NzOeI0CEAD0/edit?usp=sharing >
 
-* Configuration
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
