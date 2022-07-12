@@ -1,6 +1,5 @@
 class PictureTag < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  
+  belongs_to :tag
+  belongs_to :picture
 end
