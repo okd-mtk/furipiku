@@ -1,0 +1,23 @@
+<header>
+  <% if customer_signed_in? %>
+    <h3><%= link_to root_path %>Furipiku</h3>
+    <li>ようこそ<%= current_customer.name %>さん</li>
+    <li><%= link_to 'マイページ', public_customer_path(current_customer.id) %></li>
+    <li><%= link_to '投稿一覧', pictures_path(current_customer.id) %></li>
+    <li><%= link_to 'ブックマーク一覧', bookmarks_path %></li>
+    <li><%= link_to 'いいね一覧', likes_path %></li>
+    <li><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %></li>
+  <% elsif admin_signed_in? %>
+    <h3><%= link_to root_path %>Furipiku</h3>
+    <li><%= link_to admin_pictures_path %>投稿一覧</li>
+    <li><%= link_to admin_customer_path %>会員一覧</li>
+    <li><%= link_to admin_tags_path %>タグ一覧</li>
+    <li><%= link_to destroy_admin_session_path, method: :delete %>ログアウト</li>
+  <% else %>
+  <h3><%= link_to 'Furipiku', root_path %></h3>
+  <li><%= link_to 'About', about_path %></li>
+  <li><%= link_to '新規登録', new_customer_registration_path %></li>
+  <li><%= link_to 'ログイン', customer_session_path %></li>
+  <li><%= link_to '管理者ログイン', new_admin_session_path %></li>
+  <% end %>
+</header>

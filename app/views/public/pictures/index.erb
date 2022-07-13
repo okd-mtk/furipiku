@@ -1,0 +1,33 @@
+<h1>投稿一覧</h1>
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @pictures.each do |picture| %>
+<tbody>
+  <tr>
+    <!--投稿者のアイコン-->
+    <td><%= picture.customer.image %></td>
+    
+        <!--投稿者名-->
+    <td><%= picture.customer.name %></td>
+    
+        <!--タグ-->
+    <td><%= picture.tag %></td>
+    
+        <!--文章-->
+    <td><%= picture.message %></td>
+    
+        <!--イラスト-->
+    <td><%= image_tag picture.variant(resize: '100x100') %></td>
+  </tr>
+  
+</tbody>
+
+<% end %>
+
+</table>

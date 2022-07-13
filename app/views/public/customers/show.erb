@@ -1,0 +1,43 @@
+<h1>マイページ</h1>
+<table>
+  <tr>
+    <th></th>
+    <td>
+      <% if current_customer.image.attached? %>
+        <%= image_tag current_customer.image, size: "100×100" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "100x100" %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <th><!--ユーザ名--></th>
+    <td><%= @customer.name %></td>
+  </tr>
+
+  <tr>
+    <th>フォロー</th>
+    <td><%= link_to current_customer.following.count, following_index_path %></td>
+  </tr>
+
+  <tr>
+    <th>フォロワー</th>
+    <td><%= link_to current_customer.followers.count, follower_index_path %></td>
+  </tr>
+
+  <tr>
+    <th></th>
+    <td><%= link_to 'ブックマーク一覧', bookmarks_path %></td>
+  </tr>
+
+  <tr>
+    <th></th>
+    <td><%= link_to 'いいねした投稿一覧', likes_path %></td>
+  </tr>
+
+</table>
+
+<% if @customer == current_customer %>
+  <%= link_to edit_public_customer_path(current_customer.id) %> 編集
+<% end %>
