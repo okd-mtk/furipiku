@@ -18,8 +18,10 @@ namespace :public do
     get 'about' => 'homes#about'
     resources :likes, only: [:index, :create, :destroy]
     resources :bookmarks, only: [:index, :destroy]
-    resources :pictures, only: [:create, :index, :show, :edit, :update, :destroy]
-    resources :tags, only: [:index, :create, :edit, :desroy]
+    resources :pictures, only: [:create, :new, :index, :show, :edit, :update, :destroy]
+    resources :tags, only: [:index, :create, :edit, :destroy]
+    resources :following, only: [:index, :destroy]
+    resources :follower, only: [:index]
   end
 
   #管理者
