@@ -1,8 +1,9 @@
 class Tags < ActiveRecord::Migration[6.1]
   def change
     create_table :tags do |t|
-    t.string "name", null: false
+    t.integer "picture_tag_id"
+    t.string "name"
     t.timestamps null: false
-  end
+    end
   end
 end

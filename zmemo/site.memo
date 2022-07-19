@@ -1,0 +1,22 @@
+フォロー関係
+https://qiita.com/Kaisyou/items/86869db6345c9cc1413f
+folloing => follow
+user => customer
+
+画像複数投稿
+https://qiita.com/oak1331/items/830755889a37ceee1bc6#%E7%94%BB%E5%83%8F%E8%A1%A8%E7%A4%BA%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E7%B7%A8%E9%9B%86
+
+タグ
+https://toji.tech/rails%E3%81%A7gem%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%9B%E3%81%9A%E3%81%AB%E3%82%BF%E3%82%B0%E6%A9%9F%E8%83%BD%E3%82%92%E5%AE%9F%E8%A3%85%E3%81%99%E3%82%8B/
+
+※rails c  画像複数保存されているか
+Picture.find(1).images.blobs
+
+undifind method
+https://ichigick.com/undefined-method-for-nil/
+
+pluckメソッド
+https://pikawaka.com/rails/pluck
+
+いいね・ブックマーク
+https://qiita.com/ki_87/items/ba7de81d637aaf85e561

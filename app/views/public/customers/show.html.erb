@@ -1,0 +1,89 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <%= render 'public/shared/sidebar',customer: @customer %>
+      <div class="col-md-8 offset-md-1">
+
+      <h1>ユーザー詳細</h1>
+      <table>
+        <tr>
+          <th></th>
+          <td><%= image_tag @customer.get_profile_image(100,100) %></td>
+        </tr>
+
+        <tr>
+          <th><!--ユーザ名--></th>
+          <td><%= @customer.name %></td>
+        </tr>
+
+        <tr>
+          <th><!--フォロー機能--></th>
+          <td>
+          <%= render 'public/follows/follow_form' %>
+          <% unless current_customer == @customer %>
+            <div id="follow_form">
+            <% if current_customer.following?(@user) %>
+              <%= render 'public/follows/unfollow' %>
+            <% else %>
+              <%= render 'public/follows/follow' %>
+            <% end %>
+            </div>
+          <% end %>
+          </td>
+        </tr>
+
+        <tr>
+          <th>フォロー</th>
+          <td><%= link_to @customer.following.count, following_public_customer_path(@customer) %></td>
+        </tr>
+
+        <tr>
+          <th>フォロワー</th>
+          <td><%= link_to @customer.followers.count, followers_public_customer_path(@customer) %></td>
+        </tr>
+
+      <% if false %>
+        <tr>
+          <th></th>
+          <td><%= link_to 'ブックマーク一覧', bookmarks_public_customer_path %></td>
+        </tr>
+      <% end %>
+
+        <tr>
+          <th></th>
+          <td><%= link_to 'いいねした投稿一覧', likes_public_customer_path %></td>
+        </tr>
+      </table>
+
+      投稿履歴
+
+      <table>
+        <% @pictures.each do |picture| %>
+        <tr>
+          <th></th>
+          <td><%= image_tag current_customer.profile_image %></td>
+        </tr>
+
+        <tr>
+          <th></th>
+          <td><%= current_customer.name %></td>
+        </tr>
+
+        <tr>
+          <th></th>
+          <td><%= picture.explain %></td>
+        </tr>
+
+        <tr>
+          <th></th>
+          <th></th>
+          <% if @customer == current_customer %>
+            <td><%= link_to '編集', edit_picture_path(current_customer.id) %></td>
+            <td><%= link_to '削除', picture_path(picture.id), method: :delete %></td>
+          <% end %>
+      </tr>
+      <% end %>
+      </table>
+
+    </div>
+  </div>
+</div>

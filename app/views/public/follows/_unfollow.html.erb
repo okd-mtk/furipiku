@@ -1,0 +1,4 @@
+<%= form_for(current_customer.active_relationships.find_by(following_id: @customer.id),url:url:public_customer_relationships_path(current_customer),
+             html: { method: :delete }) do |f| %>
+  <%= f.submit "Unfollow", class: "btn" %>
+<% end %>

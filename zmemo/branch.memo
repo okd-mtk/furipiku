@@ -1,0 +1,14 @@
+# ブランチの切り方！
+
+git branch -a # 現在メインブランチなのか？確認
+git checkout -b 好きなブランチ名 # 規則性あるとよき！ ex. feature/new_kinou とか fix/naiyou
+git branch -a # 再度確認
+
+git checkout 行きたいブランチ名 # 他のブランチに行きたい
+
+# コミット編
+
+git status # ファイルの状況を確認
+git add . # 全部追加! でもちょっとアブナイかも..?
+git add ファイル名1 ファイル名2 ..... # 個別指定でaddする
+git commit -m "コメント"

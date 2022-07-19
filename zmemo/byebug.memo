@@ -1,0 +1,6 @@
+byebugで確認する
+
+byebugで止めて
+params -> どんな値が出るか
+params[:tags] -> どんな値が出るか
+params[:tags][:picture] -> どんな値が出るか

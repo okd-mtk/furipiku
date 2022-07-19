@@ -1,0 +1,8 @@
+<h2>ブックマーク一覧</h2>
+
+<% @bookmarks_pictures.each do |book|%>
+<%= book.customer.profile_image %>
+<%= book.customer.name %>
+<%= book.tag %>
+<%= book.explain %>
+<% end %>

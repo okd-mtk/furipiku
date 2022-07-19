@@ -1,0 +1,6 @@
+番号探す
+ps aux | grep puma
+
+↓
+
+kill 左下の番号

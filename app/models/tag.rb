@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
 
-  belongs_to :customer
-  has_many :pictures
+  has_many :picture_tags, dependent: :destroy
+  has_many :pictures, through: :picture_tags, dependent: :destroy
 end
