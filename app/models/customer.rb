@@ -5,11 +5,11 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :active_relationships, class_name:  "Relationship", foreign_key: "following_id", dependent: :destroy
-  has_many :active_relationships, class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: "following_id", dependent: :destroy
-  has_many :following, through: :active_relationships, source: :following, dependent: :destroy
-  has_many :followers, through: :passive_relationships, source: :follower, dependent: :destroy
+  has_many :relationships, dependent: :destroy
+  has_many :followings, through: :relationships, source: :follower
+  has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :customer
+
   has_many :pictures,     dependent: :destroy
   has_many :comments,     dependent: :destroy
   has_many :likes,        dependent: :destroy
@@ -32,16 +32,18 @@ class Customer < ApplicationRecord
 
   #ユーザーをフォロー
   def follow(other_customer)
-    active_relationships.create(follow_id: other_customer.id)
+    return if self == other_customer
+
+    relationships.find_or_create_by!(follower: other_customer)
   end
 
   #フォローを外す
   def unfollow(other_customer)
-    active_relationships.find_by(follow_id: other_customer.id).destroy
+     relationships.find_by(follower: other_customer).destroy!
   end
 
   #現在のユーザーがフォローしてたらtrueを返す
   def following?(other_customer)
-    following.include?(other_customer)
+    followings.include?(other_customer)
   end
 end

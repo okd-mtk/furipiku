@@ -1,12 +1,12 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <%= render 'public/shared/sidebar' %>
+    <%= render 'public/shared/sidebar', customer: current_customer %>
     <div class="col-md-8 offset-md-1">
 
       <h1>投稿一覧</h1>
       <table>
+        <% @pictures.each do |picture| %>
         <tr>
-          <% @pictures.each do |picture| %>
           <th></th>
             <!--投稿者のアイコン-->
           <td><%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>

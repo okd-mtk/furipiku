@@ -1,8 +1,15 @@
+.flex_test-box_top {
+  text-align: center;
+}
+
 .flex_test-box {
   display: flex;
   padding: 10px;
+  background-color: blue;
 }
 
 .flex_test-item {
-    margin:  10px;              /* 外側の余白 */
+   margin:  10px;
+   background-color: blue;
 }
+

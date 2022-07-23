@@ -13,12 +13,20 @@
 
     <tr>
       <th>フォロー</th>
-      <td><%= link_to current_customer.following.count, following_public_customer_path(customer) %></td>
+      <td>
+        <div id="followings_count_<%= current_customer.id %>">
+        <%= render 'public/relationships/followings_count', customer: current_customer %>
+        </div>
+      </td>
     </tr>
 
     <tr>
       <th>フォロワー</th>
-      <td><%= link_to current_customer.followers.count, followers_public_customer_path(customer) %></td>
+      <td>
+        <div id="follower_count_<%= current_customer.id %>">
+        <%= render 'public/relationships/follower_count', customer: current_customer %>
+        </div>
+      </td>
     </tr>
 
     <% if false %>

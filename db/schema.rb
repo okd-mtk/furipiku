@@ -104,13 +104,13 @@ ActiveRecord::Schema.define(version: 2022_07_12_190346) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "following_id"
+    t.integer "customer_id"
     t.integer "follower_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id", "follower_id"], name: "index_relationships_on_customer_id_and_follower_id", unique: true
+    t.index ["customer_id"], name: "index_relationships_on_customer_id"
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
-    t.index ["following_id", "follower_id"], name: "index_relationships_on_following_id_and_follower_id", unique: true
-    t.index ["following_id"], name: "index_relationships_on_following_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -122,4 +122,5 @@ ActiveRecord::Schema.define(version: 2022_07_12_190346) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "relationships", "customers", column: "follower_id"
 end
