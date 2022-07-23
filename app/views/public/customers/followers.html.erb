@@ -1,0 +1,17 @@
+<h1>フォロワー一覧</h1>
+<table>
+  <tr>
+    <% @customers.each do |customer| %>
+    <th></th>
+    <td><%= image_tag customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
+  </tr>
+
+  <tr>
+    <!--投稿者名-->
+    <th></th>
+    <td>
+      <%= link_to customer.name, public_customer_path(customer.id) %>
+    </td>
+  </tr>
+  <% end %>
+</table>

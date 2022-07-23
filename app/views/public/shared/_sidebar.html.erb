@@ -1,0 +1,48 @@
+<!--自分だけの詳細-->
+<div class="col-md-3">
+  <table>
+    <tr>
+      <th></th>
+      <td><%= image_tag current_customer.get_profile_image(100,100) %></td>
+    </tr>
+
+    <tr>
+      <th><!--ユーザ名--></th>
+      <td><%= current_customer.name %></td>
+    </tr>
+
+    <tr>
+      <th>フォロー</th>
+      <td>
+        <div id="followings_count_<%= current_customer.id %>">
+        <%= render 'public/relationships/followings_count', customer: current_customer %>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <th>フォロワー</th>
+      <td>
+        <div id="follower_count_<%= current_customer.id %>">
+        <%= render 'public/relationships/follower_count', customer: current_customer %>
+        </div>
+      </td>
+    </tr>
+
+    <% if false %>
+    <tr>
+      <th></th>
+      <td><%= link_to 'あなたの投稿一覧', bookmarks_public_customer_path(current_customer.id) %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <th></th>
+      <td><%= link_to 'いいねした投稿一覧', likes_public_customer_path(current_customer.id) %></td>
+    </tr>
+
+    <tr>
+      <th></th>
+      <td><%= link_to 'ブックマーク一覧', bookmarks_public_customer_path(current_customer.id) %></td>
+    </tr>
+  </table>
+</div>
