@@ -51,6 +51,12 @@ def bookmarks
     @bookmarks_pictures = Picture.find(bookmarks)
 end
 
+def comments
+    @customer = Customer.find(params[:id])
+    comments = Comment.where(customer_id: @customer.id).pluck(:picture_id)
+    @comments_pictures = Picture.find(comments)
+end
+
 private
 
 def public_customer_params

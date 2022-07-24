@@ -1,0 +1,44 @@
+<h1>投稿詳細</h1>
+<table>
+  <tbody>
+  <% @pictures.each do |picture| %>
+    <tr>
+      <!--投稿者のアイコン-->
+      <td><%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
+
+          <!--投稿者名-->
+      <td><%= picture.customer.name %></td>
+
+          <!--タグ-->
+      <td>
+        <% picture.tags.each do |tag| %>
+          <%= tag.name %>
+        <% end %>
+      </td>
+
+          <!--文章-->
+      <td><%= picture.explain %></td>
+
+          <!--イラスト-->
+      <td>
+        <% picture.post_images.each do | image | %>
+          <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
+        <% end %>
+      </td>
+    </tr>
+
+  <% end %>
+  </tbody>
+</table>
+
+  <!--コメント-->
+<% if @picture.comments.any? %>
+  <div>
+    <p>コメント件数：<%= @picture.comments.count %></p>
+    <% @picture.comments.each do |picture_comment| %>
+      <p><%= image_tag picture_comment.customer.get_profile_image(100,100) %></p>
+      <%= picture_comment.customer.name %>
+      <%= picture_comment.created_at.strftime('%Y/%m/%d') %><%= picture_comment.message %>
+    <% end %>
+  </div>
+<% end %>

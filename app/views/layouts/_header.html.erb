@@ -2,30 +2,29 @@
   <% if customer_signed_in? %>
   <div class="flex_test-box_top">
     <h3><%= link_to 'Furipiku', root_path %></h3>
-    </div>
-    <div class="flex_test-box">
-    <div class="flex_test-item">
-    ようこそ<%= current_customer.name %>さん
-    <%= link_to 'マイページ', public_customer_path(current_customer.id) %>
-    <%= link_to '投稿一覧', pictures_path %>
-    <%= link_to 'ブックマーク一覧', bookmarks_public_customer_path(current_customer.id) %>
-    <%= link_to 'いいね一覧', likes_public_customer_path(current_customer.id) %>
-    <%= link_to '投稿', new_picture_path %>
-    <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %>
-
-  <% elsif admin_signed_in? %>
-    <h3><%= link_to root_path %>Furipiku</h3>
-    <%= link_to '投稿一覧', admin_pictures_path %>
-    <%= link_to '会員一覧', admin_customer_path %>
-    <%= link_to 'タグ一覧', admin_tags_path %>
-    <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
-  <% else %>
-  <h3><%= link_to 'Furipiku', root_path %></h3>
-  <li><%= link_to 'About', about_path %>
-  <li><%= link_to '新規登録', new_customer_registration_path %>
-  <li><%= link_to 'ログイン', customer_session_path %>
-  <li><%= link_to '管理者ログイン', new_admin_session_path %>
-  <% end %>
-    </div>
   </div>
+    <div class="flex_test-box">
+      <div class="flex_test-item">
+      ようこそ<%= current_customer.name %>さん
+      <%= link_to 'マイページ', public_customer_path(current_customer.id) %>
+      <%= link_to '投稿一覧', pictures_path %>
+      <%= link_to '投稿', new_picture_path %>
+      <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %>
+
+    <% elsif admin_signed_in? %>
+      <h3><%= link_to root_path %>Furipiku</h3>
+      <%= link_to '投稿一覧', admin_pictures_path %>
+      <%= link_to '会員一覧', admin_customers_path %>
+      <%= link_to 'タグ一覧', admin_tags_path %>
+      <%= link_to 'コメント一覧', admin_comments_path %>
+      <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+    <% else %>
+      <h3><%= link_to 'Furipiku', root_path %></h3>
+      <%= link_to 'About', about_path %>
+      <%= link_to '新規登録', new_customer_registration_path %>
+      <%= link_to 'ログイン', customer_session_path %>
+      <%= link_to '管理者ログイン', admin_session_path %>
+    <% end %>
+      </div>
+    </div>
 </header>

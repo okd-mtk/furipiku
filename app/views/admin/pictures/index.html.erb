@@ -1,0 +1,63 @@
+<h1>投稿一覧</h1>
+  <table>
+    <% @pictures.each do |picture| %>
+    <tr>
+      <th></th>
+        <!--投稿者のアイコン-->
+      <td><%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
+    </tr>
+
+    <tr>
+      <!--投稿者名-->
+      <th></th>
+      <td>
+        <%= link_to picture.customer.name, admin_customer_path(picture.customer.id) %>
+      </td>
+    </tr>
+
+    <tr>
+      <!--タグ-->
+      <th></th>
+      <td>
+        <% picture.tags.each do |tag| %>
+          <%= tag.name %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+        <!--文章-->
+      <th></th>
+      <td><%= picture.explain %></td>
+    </tr>
+
+    <tr>
+        <!--イラスト-->
+      <th></th>
+      <td>
+        <% picture.post_images.each do | image | %>
+          <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <th></th>
+      <td><p>コメント件数：<%= picture.comments.count %></p></td>
+    </tr>
+
+    <tr>
+      <th></th>
+          <td><p><%= link_to '詳細', picture %></p></td>
+    </tr>
+
+    <tr>
+      <th></th>
+        <td>
+          <% if current_customer && picture.customer == current_customer || current_admin %>
+          <p><%= link_to '削除', picture, method: :delete %></p>
+          <% end %>
+        </td>
+    </tr>
+    <% end %>
+  </table>

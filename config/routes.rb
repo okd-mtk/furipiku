@@ -37,9 +37,10 @@ namespace :public do
 }
 
 namespace :admin do
-  root :to =>"homes#top"
+  root :to =>"customers#index"
   resources :customers, only: [:index, :show, :edit, :update]
-  resources :pictures, only: [:index, :show, :edit, :update, :destroy]
-  resources :tags, only: [:index, :create, :edit, :update]
-end
+  resources :pictures, only: [:index, :show, :destroy]
+  resources :tags, only: [:index, :edit, :destroy]
+  resources :comments, only: [:index, :edit, :update, :destroy]
+  end
 end

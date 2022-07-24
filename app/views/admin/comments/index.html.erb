@@ -1,0 +1,30 @@
+<h1>顧客のコメント</h1>
+
+<table>
+  <% @comments.each do |comment| %>
+    <tr>
+      <th></th>
+        <!--投稿者のアイコン-->
+      <td><%= image_tag comment.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
+    </tr>
+
+    <tr>
+      <!--投稿者名-->
+      <th></th>
+      <td>
+        <%= link_to comment.customer.name, admin_customer_path(comment.customer.id) %>
+      </td>
+    </tr>
+
+    <tr>
+      <th></th>
+      <td><%= comment.message %></td>
+    </tr>
+
+    <tr>
+      <th></th>
+      <td><%= link_to '削除', admin_comment_path(comment.id), method: :delete %></td>
+    </tr>
+
+  <% end %>
+</table>
