@@ -1,0 +1,33 @@
+<h3>会員一覧</h3>
+<table>
+
+  <% @customers.each do |customer| %>
+
+  <tr>
+    <th></th>
+      <!--投稿者のアイコン-->
+    <td><%= image_tag customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
+  </tr>
+
+  <tr>
+    <th>会員名</th>
+    <td><%= link_to customer.name,admin_customer_path(customer.id) %></td>
+  </tr>
+
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= customer.email %></td>
+  </tr>
+
+  <tr>
+    <th>ステータス</th>
+    <td>
+      <% if customer.is_deleted == false %>
+      有効
+      <% else %>
+      退会
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>

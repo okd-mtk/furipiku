@@ -32,9 +32,10 @@
     <% if false %>
     <tr>
       <th></th>
-      <td><%= link_to 'あなたの投稿一覧', bookmarks_public_customer_path(current_customer.id) %></td>
+      <td><%= link_to 'あなたの投稿一覧', picture_path(current_customer.id) %></td>
     </tr>
     <% end %>
+    
     <tr>
       <th></th>
       <td><%= link_to 'いいねした投稿一覧', likes_public_customer_path(current_customer.id) %></td>
@@ -43,6 +44,11 @@
     <tr>
       <th></th>
       <td><%= link_to 'ブックマーク一覧', bookmarks_public_customer_path(current_customer.id) %></td>
+    </tr>
+    
+    <tr>
+      <th></th>
+      <td><%= link_to 'コメント一覧', comments_public_customer_path(current_customer.id) %></td>
     </tr>
   </table>
 </div>

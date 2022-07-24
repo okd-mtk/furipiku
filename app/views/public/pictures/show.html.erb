@@ -84,6 +84,9 @@
             <%= f.text_area :message, rows: '5', placeholder: "コメントを記入" %>
             <%= f.submit "送信する", class: "btn btn-success" %>
           <% end %>
+          <% if current_customer && @picture.customer == current_customer || current_admin %>
+            <%= link_to '削除', picture_path(@picture.id), method: :delete %>
+          <% end %>
         </div>
       </div>
   </div>

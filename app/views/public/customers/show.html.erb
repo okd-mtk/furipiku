@@ -77,7 +77,7 @@
         <tr>
           <th></th>
           <th></th>
-          <% if @customer == current_customer %>
+          <% if current_customer && picture.customer == current_customer || current_admin %>
             <td><%= link_to '編集', edit_picture_path(current_customer.id) %></td>
             <td><%= link_to '削除', picture_path(picture.id), method: :delete %></td>
           <% end %>
