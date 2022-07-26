@@ -1,0 +1,20 @@
+ログイン
+ssh -i ~/.ssh/practice-aws.pem ec2-user@18.182.220.150
+
+Gem変更
+１. ローカルで変更をコミットし、リモートリポジトリへpushする
+２. SSHでEC2へ接続する
+３. アプリケーションへ移動する
+４. git pullコマンドを実行する
+５. 以下コマンドを実行する
+[ec2-user@ip-xx-xx-xx-xx アプリケーション名]$ bundle install --path vendor/bundle --without test development
+
+
+CSS／JavaScript／画像の変更
+１. ローカルでCSSやJavaScriptを編集する
+２. コミットしてリモートリポジトリへpushする
+３. SSHでEC2へ接続する
+４. アプリケーションへ移動する
+５. 「git pull origin ブランチ名」を入力する
+６. プリコンパイルを行う
+[ec2-user@ip-xx-xx-xx-xx アプリケーション名]$ bundle exec rails assets:precompile RAILS_ENV=production
