@@ -8,6 +8,14 @@
 
 #管理者側のログインのメアドとパスワード
 Admin.create!(
-   email: 'test@email',
-   password: 'testtest'
+   email: 'admin@test.com',
+   password: 'password1'
+)
+
+#顧客側のログインのメアドとパスワード
+Customer.create!(
+  [
+    {email: 'hsdld@test.com', name: 'Hsdld', password: 'password2', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_1.png"), filename:"profile_1.png") },
+    {email: 'spendi@test.com', name: 'Spendi',password: 'password3', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_2.png"), filename:"profile_2.png") }
+  ]
 )
