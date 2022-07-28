@@ -20,3 +20,15 @@ CSS／JavaScript／画像の変更
 ５. 「git pull origin ブランチ名」を入力する
 ６. プリコンパイルを行う
 [ec2-user@ip-xx-xx-xx-xx アプリケーション名]$ bundle exec rails assets:precompile RAILS_ENV=production
+
+
+
+
+502 error
+logを見る
+sudo tail -f /var/log/nginx/error.log
+nginxの再起動
+sudo service nginx restart
+
+503 error
+rails のlogを見る
