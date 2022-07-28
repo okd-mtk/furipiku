@@ -20,7 +20,7 @@
       <%= f.radio_button :is_deleted, :false %>有効
     </th>
   </tr>
-  <% end %>
-</table>
 
-<%= link_to '変更を保存',  admin_customer_path(@customer), class: 'btn btn-success font-weight-bold' %>
+  <%= f.submit "変更を保存", class: 'btn btn-success font-weight-bold' %>
+   <% end %>
+</table>

@@ -55,18 +55,31 @@
         </tr>
       </table>
 
-      投稿履歴
+      <%= link_to 'プロフィール編集', edit_public_customer_path(@customer) %></br>
+
+      <h2>あなたの投稿履歴</h2>
 
       <table>
         <% @pictures.each do |picture| %>
+
+        <!--イラスト-->
         <tr>
           <th></th>
-          <td><%= image_tag current_customer.profile_image %></td>
+          <td>
+            <% picture.post_images.each do | image | %>
+              <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
+            <% end %>
+          </td>
         </tr>
 
+        <!--タグ-->
         <tr>
           <th></th>
-          <td><%= current_customer.name %></td>
+          <td>
+            <% picture.tags.each do |tag| %>
+              <%= tag.name %>
+            <% end %>
+          </td>
         </tr>
 
         <tr>
@@ -78,13 +91,12 @@
           <th></th>
           <th></th>
           <% if current_customer && picture.customer == current_customer || current_admin %>
-            <td><%= link_to '編集', edit_picture_path(current_customer.id) %></td>
+            <td><%= link_to '詳細',  picture %></td>
             <td><%= link_to '削除', picture_path(picture.id), method: :delete %></td>
           <% end %>
-      </tr>
-      <% end %>
+        </tr>
+        <% end %>
       </table>
-
     </div>
   </div>
 </div>
