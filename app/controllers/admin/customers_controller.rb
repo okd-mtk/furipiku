@@ -13,8 +13,9 @@ class Admin::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
   end
   
-  def picutures
-    
+  def list
+    @customer = Customer.find(params[:id])
+    @pictures = @customer.pictures
   end
 
   def update

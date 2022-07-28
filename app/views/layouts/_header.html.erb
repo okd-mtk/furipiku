@@ -9,6 +9,14 @@
       <%= link_to 'マイページ', public_customer_path(current_customer.id) %>
       <%= link_to '投稿一覧', pictures_path %>
       <%= link_to '投稿', new_picture_path %>
+      
+      <!--検索-->
+      <% if false %>
+      <%= form_tag(search_path,:method => 'get') do %>
+        <%= text_field_tag :search %>
+        <%= submit_tag 'Search', :name => nil %>
+      <% end %>
+      <% end %>
       <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %>
 
     <% elsif admin_signed_in? %>

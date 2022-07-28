@@ -1,37 +1,51 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <%= render 'public/shared/sidebar', picture: @picture %>
+    <%= render 'public/shared/sidebar', picture: @picture, customer: @customer %>
       <div class="col-md-8 offset-md-1">
 
         <h1>投稿詳細</h1>
         <table>
           <tbody>
           <% @pictures.each do |picture| %>
+          
+            <!--投稿者のアイコン-->
             <tr>
-              <!--投稿者のアイコン-->
+              <th></th>
               <td><%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
-
-                  <!--投稿者名-->
+            </tr>
+            
+            <!--投稿者名-->
+            <tr>
+              <th></th>
               <td><%= picture.customer.name %></td>
-
-                  <!--タグ-->
+            </tr>
+            
+            <!--タグ-->
+            <tr>
+              <th></th>
               <td>
                 <% picture.tags.each do |tag| %>
                   <%= tag.name %>
                 <% end %>
               </td>
-
-                  <!--文章-->
+            </tr>
+            
+            <!--文章-->
+            <tr>
+              <th></th>    
               <td><%= picture.explain %></td>
-
-                  <!--イラスト-->
+            </tr>
+            
+            <!--イラスト-->
+            <tr>
+              <th></th>
               <td>
                 <% picture.post_images.each do | image | %>
                   <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
                 <% end %>
               </td>
             </tr>
-
+            
           <% end %>
           </tbody>
         </table>
