@@ -1,7 +1,10 @@
 ログイン
 ssh -i ~/.ssh/practice-aws.pem ec2-user@18.182.220.150
+
 コピー
 18.182.220.150
+
+kill $(cat tmp/pids/puma.pid)
 
 Gem変更
 １. ローカルで変更をコミットし、リモートリポジトリへpushする

@@ -10,7 +10,7 @@ class Public::PicturesController < ApplicationController
   def index
     keyword = ApplicationRecord.sanitize_sql_like(params[:keyword])
     if keyword.present?
-      @pictures = Picture.joins(:tags).where("explain LIKE ? OR tags.name LIKE ?", "%#{keyword}%", "%#{keyword}%")
+      @pictures = Picture.joins(:tags).where("pictures.explain LIKE ? OR tags.name LIKE ?", "%#{keyword}%", "%#{keyword}%")
     else
       @pictures = Picture.all
     end
