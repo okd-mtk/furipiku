@@ -13,7 +13,7 @@ class Picture < ApplicationRecord
   def liked_by?(customer)
     likes.exists?(customer_id: customer.id)
   end
-  
+
   def bookmarked_by?(customer)
     bookmarks.exists?(customer_id: customer.id)
   end

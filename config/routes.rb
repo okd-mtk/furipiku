@@ -37,9 +37,9 @@ namespace :public do
 }
 
 namespace :admin do
-  root :to =>"customers#index"
-  resources :customers, only: [:index, :show, :edit, :update] do
-  end
+  root :to => "customers#index"
+  get 'list/:id' => "customers#list"
+  resources :customers, only: [:index, :show, :edit, :update]
   resources :pictures, only: [:index, :show, :destroy]
   resources :tags, only: [:index, :edit, :destroy]
   resources :comments, only: [:index, :edit, :update, :destroy]

@@ -6,22 +6,23 @@
       <h1>投稿一覧</h1>
       <table>
         <% @pictures.each do |picture| %>
+        
+        <!--投稿者のアイコン-->
         <tr>
           <th></th>
-            <!--投稿者のアイコン-->
           <td><%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
         </tr>
 
+        <!--投稿者名-->
         <tr>
-          <!--投稿者名-->
           <th></th>
           <td>
             <%= link_to picture.customer.name, public_customer_path(picture.customer.id) %>
           </td>
         </tr>
 
+        <!--タグ-->
         <tr>
-          <!--タグ-->
           <th></th>
           <td>
             <% picture.tags.each do |tag| %>
@@ -30,14 +31,14 @@
           </td>
         </tr>
 
+        <!--文章-->
         <tr>
-            <!--文章-->
           <th></th>
           <td><%= picture.explain %></td>
         </tr>
 
+        <!--イラスト-->
         <tr>
-            <!--イラスト-->
           <th></th>
           <td>
             <% picture.post_images.each do | image | %>
@@ -46,8 +47,8 @@
           </td>
         </tr>
 
+        <!--いいね-->
         <tr>
-             <!--いいね-->
           <th></th>
           <td>
             <% if picture.liked_by?(current_customer) %>
@@ -62,8 +63,8 @@
           </td>
         </tr>
 
+        <!--ブックマーク-->
         <tr>
-          <!--ブックマーク-->
           <th></th>
           <td>
             <% if picture.bookmarked_by?(current_customer) %>

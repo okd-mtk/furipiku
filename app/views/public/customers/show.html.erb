@@ -1,6 +1,6 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <%= render 'public/shared/sidebar',customer: @customer %>
+    <%= render 'public/shared/sidebar', customer: @customer %>
       <div class="col-md-8 offset-md-1">
 
       <h3>ユーザー詳細</h3>
@@ -57,7 +57,7 @@
 
       <%= link_to 'プロフィール編集', edit_public_customer_path(@customer) %></br>
 
-      <h2>あなたの投稿履歴</h2>
+      <h2><%= @customer.name %>さんの投稿履歴</h2>
 
       <table>
         <% @pictures.each do |picture| %>

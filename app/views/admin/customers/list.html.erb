@@ -1,0 +1,33 @@
+<h1><%= @customer.name %>さんの投稿一覧</h1>
+
+<table>
+  <% @pictures.each do |picture| %>
+
+    <!--イラスト-->
+    <tr>
+      <th></th>
+      <td>
+        <% picture.post_images.each do | image | %>
+          <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
+        <% end %>
+      </td>
+    </tr>
+
+    <!--タグ-->
+    <tr>
+      <th></th>
+      <td>
+        <% picture.tags.each do |tag| %>
+          <%= tag.name %>
+        <% end %>
+      </td>
+    </tr>
+
+    <!--文章-->
+    <tr>
+      <th></th>
+      <td><%= picture.explain %></td>
+    </tr>
+
+  <% end %>
+</table>
