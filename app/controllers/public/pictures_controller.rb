@@ -7,10 +7,6 @@ class Public::PicturesController < ApplicationController
     @picture_comment = Comment.new
   end
 
-  def edit
-    @picture = Picture.find(params[:id])
-  end
-
   def index
     @pictures = Picture.all
   end
