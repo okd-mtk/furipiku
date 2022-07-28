@@ -10,6 +10,7 @@ Gem変更
 ４. git pullコマンドを実行する
 ５. 以下コマンドを実行する
 [ec2-user@ip-xx-xx-xx-xx アプリケーション名]$ bundle install --path vendor/bundle --without test development
+rails s -e production
 
 
 CSS／JavaScript／画像の変更
