@@ -6,7 +6,7 @@
       <h1>投稿一覧</h1>
       <table>
         <% @pictures.each do |picture| %>
-        
+
         <!--投稿者のアイコン-->
         <tr>
           <th></th>
@@ -100,6 +100,11 @@
               <p><%= link_to '削除', picture, method: :delete %></p>
               <% end %>
             </td>
+        </tr>
+        <% end %>
+        <% if @pictures.blank? %>
+        <tr>
+          <td>結果0件</td>
         </tr>
         <% end %>
       </table>

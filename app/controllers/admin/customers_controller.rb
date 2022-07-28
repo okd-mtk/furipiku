@@ -12,7 +12,7 @@ class Admin::CustomersController < ApplicationController
   def edit
     @customer = Customer.find(params[:id])
   end
-  
+
   def list
     @customer = Customer.find(params[:id])
     @pictures = @customer.pictures
@@ -27,7 +27,7 @@ class Admin::CustomersController < ApplicationController
   private
 
   def admin_customer_params
-    params.require(:customer).permit(:name, :email, :profile_image)
+    params.require(:customer).permit(:name, :email, :profile_image, :is_deleted)
   end
 
 end
