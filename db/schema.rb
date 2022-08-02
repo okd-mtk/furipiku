@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2022_07_12_190346) do
   create_table "tags", force: :cascade do |t|
     t.integer "picture_tag_id"
     t.string "name"
+    t.integer "cloud", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

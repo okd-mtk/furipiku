@@ -3,32 +3,17 @@
     <%= render 'public/shared/sidebar', customer: @customer %>
       <div class="col-md-8 offset-md-1">
 
-      <h3>ユーザー詳細</h3>
+      <h3><%= @customer.name %>さんの詳細</h3>
       <table>
-
-        <tr>
-          <th><!--ユーザ名--></th>
-          <td><%= @customer.name %></td>
-        </tr>
-
         <tr>
           <th></th>
           <td><%= image_tag @customer.get_profile_image(100,100) %></td>
         </tr>
 
+        <!--ユーザ名-->
         <tr>
-          <th><!--フォロー機能--></th>
-          <td>
-            <% unless current_customer == @customer %>
-              <div id="follow-button-<%= @customer.id %>">
-              <% if current_customer.following?(@customer) %>
-                <%= render 'public/relationships/unfollow_button', customer: @customer %>
-              <% else %>
-                <%= render 'public/relationships/follow_botton', customer: @customer %>
-              <% end %>
-              </div>
-            <% end %>
-          </td>
+          <th></th>
+          <td><h3><%= @customer.name %></h3></td>
         </tr>
 
         <tr>
@@ -49,13 +34,22 @@
           </td>
         </tr>
 
+        <!--フォロー機能-->
         <tr>
           <th></th>
-          <td><%= link_to 'いいねした投稿一覧', likes_public_customer_path %></td>
+          <td>
+            <% unless current_customer == @customer %>
+              <div id="follow-button-<%= @customer.id %>">
+              <% if current_customer.following?(@customer) %>
+                <%= render 'public/relationships/unfollow_button', customer: @customer %>
+              <% else %>
+                <%= render 'public/relationships/follow_botton', customer: @customer %>
+              <% end %>
+              </div>
+            <% end %>
+          </td>
         </tr>
       </table>
-
-      <%= link_to 'プロフィール編集', edit_public_customer_path(@customer) %></br>
 
       <h2><%= @customer.name %>さんの投稿履歴</h2>
 
@@ -81,7 +75,8 @@
             <% end %>
           </td>
         </tr>
-
+        
+        <!--説明文-->
         <tr>
           <th></th>
           <td><%= picture.explain %></td>
@@ -92,7 +87,7 @@
           <th></th>
           <% if current_customer && picture.customer == current_customer || current_admin %>
             <td><%= link_to '詳細',  picture %></td>
-            <td><%= link_to '削除', picture_path(picture.id), method: :delete %></td>
+            <td><%= link_to '削除', picture_path(picture.id), method: :delete, class:"btn btn-danger" %></td>
           <% end %>
         </tr>
         <% end %>
