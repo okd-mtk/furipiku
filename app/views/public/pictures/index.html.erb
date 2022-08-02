@@ -1,113 +1,87 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <%= render 'public/shared/sidebar', customer: current_customer %>
+
     <div class="col-md-8 offset-md-1">
+    <h2>みんなの投稿</h2>
+      <% @pictures.each do |picture| %>
+        <div class="card" style="width: 100%; margin-bottom: 10px;">
 
-      <h1>投稿一覧</h1>
-      <table>
-        <% @pictures.each do |picture| %>
-
-        <!--投稿者のアイコン-->
-        <tr>
-          <th></th>
-          <td><%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
-        </tr>
-
-        <!--投稿者名-->
-        <tr>
-          <th></th>
-          <td>
-            <%= link_to picture.customer.name, public_customer_path(picture.customer.id) %>
-          </td>
-        </tr>
-
-        <!--タグ-->
-        <tr>
-          <th></th>
-          <td>
-            <% picture.tags.each do |tag| %>
-              <%= tag.name %>
-            <% end %>
-          </td>
-        </tr>
-
-        <!--文章-->
-        <tr>
-          <th></th>
-          <td><%= picture.explain %></td>
-        </tr>
-
-        <!--イラスト-->
-        <tr>
-          <th></th>
-          <td>
+          <!--イラスト-->
+          <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
             <% picture.post_images.each do | image | %>
               <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
             <% end %>
-          </td>
-        </tr>
+          </div>
 
-        <!--いいね-->
-        <tr>
-          <th></th>
-          <td>
-            <% if picture.liked_by?(current_customer) %>
-              <%= link_to public_like_path(current_customer.likes.find_by(picture_id: picture.id)), method: :delete do %>
-                  ♥<%= picture.likes.count %>
+          <!--投稿者のアイコン-->
+          <div>
+            <div style="display: inline-block;">
+            <%= image_tag picture.customer.profile_image.variant(resize_to_limit: [50, 50]).processed, class:"mt-3 rounded-circle bg-primary" %>
+            </div>
+
+          <!--投稿者名-->
+            <div style="display: inline-block;">
+              👤<%= link_to picture.customer.name, public_customer_path(picture.customer.id) %>
+            </div>
+
+          <!--タグ-->
+            <div style="display: inline-block;">
+              <% picture.tags.each do |tag| %>
+                <% if tag.cloud == 0 #手動 %>
+                  <%= tag.name %>
+                <% else #Cloud API %>
+                  <%= tag.name %>★,
                 <% end %>
-            <% else %>
-              <%= link_to public_likes_path(picture_id: picture.id), method: :post do %>
-                ♡<%= picture.likes.count %>
-                <% end %>
-            <% end %>
-          </td>
-        </tr>
-
-        <!--ブックマーク-->
-        <tr>
-          <th></th>
-          <td>
-            <% if picture.bookmarked_by?(current_customer) %>
-              <p>
-                <%= link_to public_bookmark_path(current_customer.bookmarks.find_by(picture_id: picture.id)), method: :delete do %>
-                  ブックマークを外す
-                <% end %>
-              </p>
-              <% else %>
-              <p>
-                <%= link_to public_bookmarks_path(picture_id: picture.id), method: :post do %>
-                  ブックマークに登録する📖
-                <% end %>
-              </p>
-            <% end %>
-          </td>
-        </tr>
-
-        <tr>
-          <th></th>
-          <td><p>コメント件数：<%= picture.comments.count %></p></td>
-        </tr>
-
-        <tr>
-          <th></th>
-              <td><p><%= link_to '詳細', picture %></p></td>
-        </tr>
-
-        <tr>
-          <th></th>
-            <td>
-              <% if current_customer && picture.customer == current_customer || current_admin %>
-              <p><%= link_to '削除', picture, method: :delete %></p>
               <% end %>
-            </td>
-        </tr>
-        <% end %>
-        <% if @pictures.blank? %>
-        <tr>
-          <td>結果0件</td>
-        </tr>
-        <% end %>
-      </table>
+            </div>
+
+          <!--文章-->
+            <div style="display: inline-block;"><%= picture.explain %></div>
+
+          <!--いいね-->
+            <div style="display: inline-block;">
+              <% if picture.liked_by?(current_customer) %>
+                <%= link_to public_like_path(current_customer.likes.find_by(picture_id: picture.id)), method: :delete do %>
+                    ♥<%= picture.likes.count %>
+                <% end %>
+              <% else %>
+                <%= link_to public_likes_path(picture_id: picture.id), method: :post do %>
+                  ♡<%= picture.likes.count %>
+                <% end %>
+              <% end %>
+            </div>
+
+          <!--ブックマーク-->
+            <div style="display: inline-block;">
+              <% if picture.bookmarked_by?(current_customer) %>
+                <%= link_to public_bookmark_path(current_customer.bookmarks.find_by(picture_id: picture.id)), method: :delete do %>
+                  📖外す
+                <% end %>
+              <% else %>
+                <%= link_to public_bookmarks_path(picture_id: picture.id), method: :post do %>
+                  📖登録
+                <% end %>
+              <% end %>
+            </div>
+
+            <div style="display: inline-block;">💬数：<%= picture.comments.count %></div>
+
+            <div style="display: inline-block;"><%= link_to '詳細', picture %></div>
+
+            <div style="display: inline-block;">
+              <% if current_customer && picture.customer == current_customer || current_admin %>
+              <p><%= link_to '削除', picture, method: :delete, class:"btn btn-danger" %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @pictures.blank? %>
+        <div>結果0件</div>
+      <% end %>
+
     </div>
   </div>
 </div>

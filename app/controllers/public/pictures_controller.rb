@@ -8,8 +8,8 @@ class Public::PicturesController < ApplicationController
   end
 
   def index
-    keyword = ApplicationRecord.sanitize_sql_like(params[:keyword])
-    if keyword.present?
+    if params[:keyword].present?
+      keyword = ApplicationRecord.sanitize_sql_like(params[:keyword])
       @pictures = Picture.joins(:tags).where("pictures.explain LIKE ? OR tags.name LIKE ?", "%#{keyword}%", "%#{keyword}%")
     else
       @pictures = Picture.all
@@ -23,7 +23,14 @@ class Public::PicturesController < ApplicationController
   def create
     @picture = Picture.new(picture_params)
     if @picture.save
+
       @picture.save_tags(params[:picture][:tag])
+      @picture.post_images.each do |post_image|
+        tags = Vision.get_image_data(post_image)
+        tags.each do |tag|
+          @picture.tags.create(name: tag, cloud: 1)
+        end
+      end
       redirect_to pictures_path
     else
       render :new

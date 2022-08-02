@@ -6,47 +6,49 @@
         <h1>投稿詳細</h1>
         <table>
           <tbody>
-          <% @pictures.each do |picture| %>
-          
+
             <!--投稿者のアイコン-->
             <tr>
               <th></th>
-              <td><%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
+              <td><%= image_tag @picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
             </tr>
-            
+
             <!--投稿者名-->
             <tr>
               <th></th>
-              <td><%= picture.customer.name %></td>
+              <td><%= @picture.customer.name %></td>
             </tr>
-            
+
             <!--タグ-->
             <tr>
               <th></th>
               <td>
-                <% picture.tags.each do |tag| %>
-                  <%= tag.name %>
+                <% @picture.tags.each do |tag| %>
+                  <% if tag.cloud == 0 #手動 %>
+                    <%= tag.name %>
+                  <% else #Cloud API %>
+                      <%= tag.name %>★,
+                  <% end %>
                 <% end %>
               </td>
             </tr>
-            
+
             <!--文章-->
             <tr>
-              <th></th>    
-              <td><%= picture.explain %></td>
+              <th></th>
+              <td><%= @picture.explain %></td>
             </tr>
-            
+
             <!--イラスト-->
             <tr>
               <th></th>
               <td>
-                <% picture.post_images.each do | image | %>
+                <% @picture.post_images.each do | image | %>
                   <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
                 <% end %>
               </td>
             </tr>
-            
-          <% end %>
+
           </tbody>
         </table>
 

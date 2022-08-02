@@ -37,10 +37,10 @@ class Picture < ApplicationRecord
     p current_tags
 
     # tag_mapsテーブルから、(1)のタグを削除
-    #   tagsテーブルから該当のタグを探し出して削除する
+    # tagsテーブルから該当のタグを探し出して削除する
     old_tags.each do |old|
-      # tag_mapsテーブルにあるpost_idとtag_idを削除
-      #   後続のfind_byでtag_idを検索
+      # tag_mapsテーブルにあるpicture_idとtag_idを削除
+      # 後続のfind_byでtag_idを検索
       self.tags.delete Tag.find_by(name: old)
     end
     # tagsテーブルから(2)のタグを探して、tag_mapsテーブルにtag_idを追加する

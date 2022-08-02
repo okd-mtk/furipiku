@@ -1,36 +1,54 @@
-<header>
-  <% if customer_signed_in? %>
-  <div class="flex_test-box_top">
-    <h3><%= link_to 'Furipiku', root_path %></h3>
-  </div>
-    <div class="flex_test-box">
-      <div class="flex_test-item">
-      ようこそ<%= current_customer.name %>さん
-      <%= link_to 'マイページ', public_customer_path(current_customer.id) %>
-      <%= link_to '投稿一覧', pictures_path %>
-      <%= link_to '投稿', new_picture_path %>
+<header class="shadow-sm">
+  <nav class="navbar navbar-light light-blue lighten-4">
 
-      <!--検索-->
-      <%= form_tag(pictures_path,:method => 'get') do %>
-        <%= text_field_tag :keyword %>
-        <%= submit_tag 'Search', :name => nil %>
-      <% end %>
-      <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %>
+    <a class="navbar-brand"><%= link_to 'Furipiku', root_path %></a>
+    <% if customer_signed_in? %>
+      ようこそ<%= current_customer.name %>さん
+
+    <!--検索-->
+    <%= form_tag(pictures_path,:method => 'get') do %>
+    <%= text_field_tag :keyword %>
+    <%= submit_tag '🔍Search', :name => nil %>
+    <% end %>
+
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+      aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text">
+        <i class="fas fa-bars fa-1x"></i></span></button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link"><%= link_to 'マイページ', public_customer_path(current_customer.id) %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><%= link_to 'みんなの投稿', pictures_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><%= link_to '投稿', new_picture_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %></a>
+        </li>
+      </ul>
+  </nav>
 
     <% elsif admin_signed_in? %>
-      <h3><%= link_to root_path %>Furipiku</h3>
       <%= link_to '投稿一覧', admin_pictures_path %>
       <%= link_to '会員一覧', admin_customers_path %>
       <%= link_to 'タグ一覧', admin_tags_path %>
       <%= link_to 'コメント一覧', admin_comments_path %>
       <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+
     <% else %>
-      <h3><%= link_to 'Furipiku', root_path %></h3>
       <%= link_to 'About', about_path %>
       <%= link_to '新規登録', new_customer_registration_path %>
       <%= link_to 'ログイン', customer_session_path %>
       <%= link_to '管理者ログイン', admin_session_path %>
     <% end %>
-      </div>
-    </div>
 </header>
+

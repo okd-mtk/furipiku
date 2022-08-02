@@ -1,19 +1,24 @@
-<!--バリデーション-->
+<div class="container">
 
-<h1>新規投稿</h1>
-<%= form_with model: @picture, url: pictures_path, local: true do |f| %>
+  <h1 class="text-dark bg-light p-4 mb-0">投稿フォーム</h1>
+  <%= form_with model: @picture, url: pictures_path, local: true do |f| %>
+    <div class="input-group mb-4 mt-2">
+      
+    <!--イラスト-->
+    イラストや写真はこちらから⇒
+    <%= f.file_field :post_images, multiple: :true %>
 
-<!--タグ-->
-タグ欄
-<%= f.text_field :tag %>
+    <!--タグ-->
+    タグ欄：
+    <%= f.text_field :tag, placeholder:"スペースで複数タグ投稿可" %>
+    </div>
+    
+    <!--文章-->
+    💬欄
+    <%= f.text_field :explain, class:"form-control", rows:"3", placeholder:"この投稿について" %>
+    <hr>
 
-<!--文章-->
-文章欄
-<%= f.text_field :explain %>
+    <%= f.submit '投稿', class:"btn btn-lg btn-block btn-info mt-4" %>
 
-<!--イラスト-->
-<%= f.file_field :post_images, multiple: :true %>
-
-<%= f.submit '投稿' %>
-
-<% end %>
+    <% end %>
+  </div>
