@@ -2,8 +2,3 @@ div=>span
 divをeachで回す
 
 imgをdivタグで囲む
-
-ctrl
-
-
-Rails.logger.warn(err)

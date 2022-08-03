@@ -6,13 +6,11 @@
       <h3><%= @customer.name %>さんの詳細</h3>
       <table>
         <tr>
-          <th></th>
           <td><%= image_tag @customer.get_profile_image(100,100) %></td>
         </tr>
 
         <!--ユーザ名-->
         <tr>
-          <th></th>
           <td><h3><%= @customer.name %></h3></td>
         </tr>
 
@@ -36,7 +34,6 @@
 
         <!--フォロー機能-->
         <tr>
-          <th></th>
           <td>
             <% unless current_customer == @customer %>
               <div id="follow-button-<%= @customer.id %>">
@@ -53,45 +50,45 @@
 
       <h2><%= @customer.name %>さんの投稿履歴</h2>
 
-      <table>
-        <% @pictures.each do |picture| %>
+      <div class="card">
+      <% @pictures.each do |picture| %>
 
         <!--イラスト-->
-        <tr>
-          <th></th>
-          <td>
-            <% picture.post_images.each do | image | %>
-              <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
-            <% end %>
-          </td>
-        </tr>
+        <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+          <% picture.post_images.each do | image | %>
+            <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
+          <% end %>
+        </div>
 
         <!--タグ-->
-        <tr>
-          <th></th>
-          <td>
-            <% picture.tags.each do |tag| %>
-              <%= tag.name %>
+        <div style="display: inline-block;">
+          <% picture.tags.each do |tag| %>
+            <% if tag.cloud == 0 #手動 %>
+              #<%= tag.name %>
+            <% else #Cloud API %>
+            <!--<div class="tag-font">-->
+              ★<%= tag.name %>
+            <!--</div>-->
             <% end %>
-          </td>
-        </tr>
-        
-        <!--説明文-->
-        <tr>
-          <th></th>
-          <td><%= picture.explain %></td>
-        </tr>
-
-        <tr>
-          <th></th>
-          <th></th>
-          <% if current_customer && picture.customer == current_customer || current_admin %>
-            <td><%= link_to '詳細',  picture %></td>
-            <td><%= link_to '削除', picture_path(picture.id), method: :delete, class:"btn btn-danger" %></td>
           <% end %>
-        </tr>
-        <% end %>
-      </table>
+        </div>
+
+        <!--説明文-->
+        <div style="display: inline-block;"><%= picture.explain %></div>
+
+        <div style="display: inline-block;"><%= link_to '詳細', picture, class:"btn btn-primary" %></div>
+
+        <div style="display: inline-block;">
+          <% if current_customer && picture.customer == current_customer || current_admin %>
+          <p><%= link_to '削除', picture_path(picture.id), method: :delete, class:"btn btn-danger" %></p>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+
+      <% if @pictures.blank? %>
+        <div>まだ投稿はありません。</div>
+      <% end %>
     </div>
   </div>
 </div>

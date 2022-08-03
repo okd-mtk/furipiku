@@ -23,7 +23,6 @@ class Public::PicturesController < ApplicationController
   def create
     @picture = Picture.new(picture_params)
     if @picture.save
-
       @picture.save_tags(params[:picture][:tag])
       @picture.post_images.each do |post_image|
         tags = Vision.get_image_data(post_image)
