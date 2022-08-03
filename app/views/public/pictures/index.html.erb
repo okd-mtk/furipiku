@@ -9,37 +9,45 @@
 
           <!--イラスト-->
           <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+            <div id="theTarget">
             <% picture.post_images.each do | image | %>
               <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
             <% end %>
+            </div>
           </div>
 
-          <!--投稿者のアイコン-->
           <div>
+            <!--投稿者のアイコン-->
             <div style="display: inline-block;">
             <%= image_tag picture.customer.profile_image.variant(resize_to_limit: [50, 50]).processed, class:"mt-3 rounded-circle bg-primary" %>
             </div>
 
-          <!--投稿者名-->
-            <div style="display: inline-block;">
-              👤<%= link_to picture.customer.name, public_customer_path(picture.customer.id) %>
-            </div>
-
-          <!--タグ-->
-            <div style="display: inline-block;">
-              <% picture.tags.each do |tag| %>
-                <% if tag.cloud == 0 #手動 %>
-                  <%= tag.name %>
-                <% else #Cloud API %>
-                  <%= tag.name %>★,
-                <% end %>
-              <% end %>
-            </div>
-
-          <!--文章-->
+            <!--文章-->
             <div style="display: inline-block;"><%= picture.explain %></div>
 
+            <!--タグ-->
+            <div style="display: inline-block;">
+              <p>
+              <% picture.tags.each do |tag| %>
+                <% if tag.cloud == 0 #手動 %>
+                  #<%= tag.name %>
+                <% else #Cloud API %>
+                <!--<div class="tag-font">-->
+                  ★<%= tag.name %>
+                <!--</div>-->
+                <% end %>
+              <% end %>
+              </p>
+            </div>
+
+            <!--投稿者名-->
+            <div style="display: inline-block;">
+              <p>👤<%= link_to picture.customer.name, public_customer_path(picture.customer.id) %></p>
+            </div>
+          </div>
+
           <!--いいね-->
+          <div style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
             <div style="display: inline-block;">
               <% if picture.liked_by?(current_customer) %>
                 <%= link_to public_like_path(current_customer.likes.find_by(picture_id: picture.id)), method: :delete do %>
@@ -67,7 +75,7 @@
 
             <div style="display: inline-block;">💬数：<%= picture.comments.count %></div>
 
-            <div style="display: inline-block;"><%= link_to '詳細', picture %></div>
+            <div style="display: inline-block;"><%= link_to '詳細', picture, class:"btn btn-primary" %></div>
 
             <div style="display: inline-block;">
               <% if current_customer && picture.customer == current_customer || current_admin %>
@@ -81,7 +89,6 @@
       <% if @pictures.blank? %>
         <div>結果0件</div>
       <% end %>
-
     </div>
   </div>
 </div>
