@@ -1,27 +1,30 @@
 <h1><%= @customer.name %>さんの詳細</h1>
 
-<table>
-  <tr>
-    <th>会員名</th>
-    <td><%= @customer.name %></td>
-  </tr>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">会員名</th>
+      <th scope="col">メールアドレス</th>
+      <th scope="col">ステータス</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
 
-  <tr>
-    <th>メールアドレス</th>
-    <td><%= @customer.email %></td>
-  </tr>
-
-  <tr>
-    <th>ステータス</th>
-    <td>
-      <% if @customer.is_deleted == false %>
-      有効
-      <% else %>
-      退会
-      <% end %>
-    </td>
-  </tr>
+  <tbody>
+    <tr>
+      <td><%= @customer.name %></td>
+      <td><%= @customer.email %></td>
+      <td>
+        <% if @customer.is_deleted == false %>
+        有効
+        <% else %>
+        退会
+        <% end %>
+      </td>
+      <td>
+        <%= link_to '編集する', edit_admin_customer_path(@customer), class: 'btn btn-success font-weight-bold' %>
+        <%= link_to '投稿一覧を見る', admin_path(@customer), class: 'btn btn-primary font-weight-bold' %>
+      </td>
+    </tr>
+  </tbody>
 </table>
-
-<%= link_to '編集する', edit_admin_customer_path(@customer), class: 'btn btn-success font-weight-bold' %>
-<%= link_to '投稿一覧を見る', admin_path(@customer), class: 'btn btn-primary font-weight-bold' %>

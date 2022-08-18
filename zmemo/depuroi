@@ -25,7 +25,8 @@ CSS／JavaScript／画像の変更
 ６. プリコンパイルを行う
 [ec2-user@ip-xx-xx-xx-xx アプリケーション名]$ bundle exec rails assets:precompile RAILS_ENV=production
 
-
+.envを追加した時(cloud9で)
+scp -i ~/.ssh/practice-aws.pem .env ec2-user@18.182.220.150:furipiku/
 
 
 502 error
@@ -36,3 +37,7 @@ sudo service nginx restart
 
 503 error
 rails のlogを見る
+
+最新のエラー
+tail -f log/production.log
+

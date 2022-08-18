@@ -1,63 +1,42 @@
 <h1>投稿一覧</h1>
-  <table>
-    <% @pictures.each do |picture| %>
+<table class="table">
+  <thead>
     <tr>
-      <th></th>
-        <!--投稿者のアイコン-->
-      <td><%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
+      <th scope="col"></th>
+      <th scope="col">会員名</th>
+      <th scope="col">投稿画像</th>
+      <th scope="col">文章</th>
+      <th scope="col"></th>
     </tr>
+  </thead>
 
+  <tbody>
+    <% @pictures.each_with_index do |picture,i| %>
     <tr>
-      <!--投稿者名-->
-      <th></th>
+      <th scope="row"><%= i +1 %></th>
+      
+      <!--アイコンと名前-->
       <td>
+        <%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %>
         <%= link_to picture.customer.name, admin_customer_path(picture.customer.id) %>
       </td>
-    </tr>
 
-    <tr>
-      <!--タグ-->
-      <th></th>
+      <!--投稿画像-->
       <td>
-        <% picture.tags.each do |tag| %>
-          <%= tag.name %>
-        <% end %>
+      <% picture.post_images.each do | image | %>
+        <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
+      <% end %>
       </td>
-    </tr>
 
-    <tr>
-        <!--文章-->
-      <th></th>
+      <!--文章-->
       <td><%= picture.explain %></td>
-    </tr>
 
-    <tr>
-        <!--イラスト-->
-      <th></th>
+      <!--詳細と削除-->
       <td>
-        <% picture.post_images.each do | image | %>
-          <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
-        <% end %>
+      <%= link_to '詳細', picture, class:"btn btn-primary" %>
+      <%= link_to '削除', picture, method: :delete, class:"btn btn-danger" %>
       </td>
-    </tr>
-
-    <tr>
-      <th></th>
-      <td><p>コメント件数：<%= picture.comments.count %></p></td>
-    </tr>
-
-    <tr>
-      <th></th>
-          <td><p><%= link_to '詳細', picture %></p></td>
-    </tr>
-
-    <tr>
-      <th></th>
-        <td>
-          <% if current_customer && picture.customer == current_customer || current_admin %>
-          <p><%= link_to '削除', picture, method: :delete %></p>
-          <% end %>
-        </td>
     </tr>
     <% end %>
-  </table>
+  </tbody>
+</table>
