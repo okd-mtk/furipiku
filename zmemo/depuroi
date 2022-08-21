@@ -32,6 +32,7 @@ CSS／JavaScript／画像の変更
 scp -i ~/.ssh/practice-aws.pem .env ec2-user@18.182.220.150:furipiku/
 
 
+
 502 error
 logを見る
 sudo tail -f /var/log/nginx/error.log
