@@ -12,8 +12,8 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
-import "./skipper.js"
-import "./script.js"
 
 Rails.start()
 ActiveStorage.start()
+
+import "./slick"

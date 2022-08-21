@@ -1,11 +1,5 @@
-
 <div class="container px-5 px-sm-0">
-
-
-
   <div class="row">
-
-
     <%= render 'public/shared/sidebar', customer: current_customer %>
 
     <div class="col-md-8 offset-md-1">
@@ -24,21 +18,16 @@
             </div>
 
             <!--イラスト-->
-            <div id="tall">
-            <div id="theTarget">
-    <div class="image"></div>    <div class="image"></div>
-
-             <!--<div style="margin: 5px; text-align: center;">
-
+            <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+            <div class='container-slide'>
+              <div class='single-item'>
                 <% picture.post_images.each do | image | %>
-                  <%#= image_tag image.variant(resize_to_limit: [150, 150]).processed ,class:"image" %>
-
+                  <%= image_tag image.variant(resize_to_limit: [150, 150]).processed %>
                 <% end %>
               </div>
             </div>
---></div>
-            <div>
 
+            <div>
               <!--文章-->
               <div style="display: inline-block;"><%= picture.explain %></div>
 
@@ -95,9 +84,3 @@
           </div>
         </div>
         <% end %>
-
-          <div id="tall">
-            <div id="theTarget">
-    <div class="image"></div>    <div class="image"></div>
-    </div>
-    </div>
