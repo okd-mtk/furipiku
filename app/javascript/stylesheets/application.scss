@@ -2,3 +2,30 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import 'navbar';
 @import 'sidebar';
+
+
+#tall {
+  height: 300px;
+}
+.image {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwR2l1hmlhURAyOlMr41KK0Wi5svVhOl1HEM7-7xTw&s");
+  background-size: cover;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+//ブックマークのタイトル
+.font-title1 {
+  font-family: 'Corben', cursive;
+}
+
+// お気に入りのタイトル
+.font-title2 {
+  font-family: "Nikukyu";
+}
+
+// みんなの投稿のタイトル
+.font-title3 {
+  font-family: "Nico Moji";
+}

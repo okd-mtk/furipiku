@@ -6,11 +6,20 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+  <!--タイトルのフォント-->
+    <!--ブックマークのタイトル-->
+    <link href="https://fonts.googleapis.com/css2?family=Corben:wght@700&display=swap" rel="stylesheet">
+    <!--いいねのタイトル-->
+    <link href="https://fonts.googleapis.com/earlyaccess/nikukyu.css" rel="stylesheet">
+    <!--みんなの投稿のタイトル-->
+    <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
+  <!--ここまで-->
     <%= stylesheet_pack_tag 'application', media: 'all'  %>
     <%= javascript_pack_tag 'application' %>
   </head>
 
   <%= render 'layouts/header' %>
+
 
   <body>
     <%= yield %>

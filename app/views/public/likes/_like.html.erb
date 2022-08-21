@@ -1,0 +1,9 @@
+<% if picture.liked_by?(current_customer) %>
+  <%= link_to public_like_path(current_customer.likes.find_by(picture_id: picture.id)), method: :delete, remote: true do %>
+      ♥<%= picture.likes.count %>
+  <% end %>
+<% else %>
+  <%= link_to public_likes_path(picture_id: picture.id), method: :post, remote: true do %>
+    ♡<%= picture.likes.count %>
+  <% end %>
+<% end %>
