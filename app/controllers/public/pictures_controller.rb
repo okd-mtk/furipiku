@@ -42,7 +42,11 @@ class Public::PicturesController < ApplicationController
   def destroy
     picture = Picture.find(params[:id])
     picture.destroy
-    redirect_to pictures_path
+    if customer_signed_in?
+      redirect_to pictures_path
+    elsif admin_signed_in?
+      redirect_to admin_pictures_path
+    end
   end
 
   def bookmarks

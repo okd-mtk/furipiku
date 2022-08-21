@@ -1,0 +1,9 @@
+<% if picture.bookmarked_by?(current_customer) %>
+  <%= link_to public_bookmark_path(current_customer.bookmarks.find_by(picture_id: picture.id)), method: :delete, remote: true do %>
+    📖外す
+  <% end %>
+<% else %>
+  <%= link_to public_bookmarks_path(picture_id: picture.id), method: :post, remote: true do %>
+    📖登録
+  <% end %>
+<% end %>

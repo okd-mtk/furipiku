@@ -1,30 +1,28 @@
 <h1>顧客のコメント</h1>
-
-<table>
-  <% @comments.each do |comment| %>
+<table class="table">
+  <thead>
     <tr>
-      <th></th>
-        <!--投稿者のアイコン-->
-      <td><%= image_tag comment.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
+      <th scope="col"></th>
+      <th scope="col">投稿元</th>
+      <th scope="col">コメント</th>
+      <th scope="col"></th>
     </tr>
-
+  </thead>
+  
+  <tbody>
+    <% @comments.each do |comment| %>
     <tr>
-      <!--投稿者名-->
-      <th></th>
+      <th scope="row">1</th>
+      <!--投稿した画像と 人の名前と文章-->
+      <td></td>
       <td>
+        <%= comment.message %>
         <%= link_to comment.customer.name, admin_customer_path(comment.customer.id) %>
       </td>
-    </tr>
-
-    <tr>
-      <th></th>
-      <td><%= comment.message %></td>
-    </tr>
-
-    <tr>
-      <th></th>
-      <td><%= link_to '削除', admin_comment_path(comment.id), method: :delete %></td>
+      <td><%= link_to '削除', admin_comment_path(comment.id), method: :delete, class: "btn btn-danger" %></td>
     </tr>
 
   <% end %>
+  </tbody>
+  
 </table>

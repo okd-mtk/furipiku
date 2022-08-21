@@ -2,3 +2,20 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import 'navbar';
 @import 'sidebar';
+@import 'slick';
+
+
+//ブックマークのタイトル
+.font-title1 {
+  font-family: 'Corben', cursive;
+}
+
+// お気に入りのタイトル
+.font-title2 {
+  font-family: "Nikukyu";
+}
+
+// みんなの投稿のタイトル
+.font-title3 {
+  font-family: "Nico Moji";
+}

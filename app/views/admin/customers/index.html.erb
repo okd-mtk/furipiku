@@ -1,33 +1,38 @@
 <h3>会員一覧</h3>
-<table>
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th></th>
+      <th style="width: 100px;">会員名</th>
+      <th scope="col">メールアドレス</th>
+      <th scope="col">ステータス</th>
+    </tr>
+  </thead>
 
-  <% @customers.each do |customer| %>
+  <tbody>
+    <% @customers.each_with_index do |customer,i| %>
 
-  <tr>
-    <th></th>
-      <!--投稿者のアイコン-->
-    <td><%= image_tag customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
-  </tr>
+    <!--アイコンと名前-->
+    <tr>
+      <th scope="row"><%= i +1 %></th>
+      <td>
+        <% if customer.profile_image.variant(resize_to_limit: [100, 100]) %>
+        <%= image_tag customer.profile_image.variant(resize_to_limit: [100, 100]) %>
+        <% end %>
+        <%= link_to customer.name, admin_customer_path(customer.id) %>
+      </td>
 
-  <tr>
-    <th>会員名</th>
-    <td><%= link_to customer.name,admin_customer_path(customer.id) %></td>
-  </tr>
+      <!--メールアドレス-->
+      <td><%= customer.email %></td>
 
-  <tr>
-    <th>メールアドレス</th>
-    <td><%= customer.email %></td>
-  </tr>
-
-  <tr>
-    <th>ステータス</th>
-    <td>
-      <% if customer.is_deleted == false %>
-      有効
-      <% else %>
-      退会
-      <% end %>
-    </td>
-  </tr>
-  <% end %>
+      <!--ステータス-->
+      <td>
+        <% if customer.is_deleted == false %>
+        有効
+        <% else %>
+        退会
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
 </table>

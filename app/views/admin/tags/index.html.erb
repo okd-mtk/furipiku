@@ -1,9 +1,24 @@
 <h1>タグ一覧</h1>
-<table>
-  <% @tags.each do |tag| %>
-
-  <%= tag.name %>
-  <%= link_to '削除', admin_tag_path(tag.id), method: :delete %>
-
-  <% end %>
+<table class="table text-align: center;">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">タグ名</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+    <tr>
+      <th scope="row">1</th>
+      <td>
+      #<%= tag.name %>
+      </td>
+      <td>
+      <%= link_to '削除', admin_tag_path(tag.id), method: :delete, class: "btn btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>
+

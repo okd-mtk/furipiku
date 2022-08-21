@@ -1,99 +1,70 @@
-<h1>ブックマーク登録一覧</h1>
-  <table>
-    <% @bookmarks_pictures.each do |picture| %>
-    <tr>
-      <th></th>
-        <!--投稿者のアイコン-->
-      <td><%= image_tag picture.customer.profile_image.variant(resize_to_limit: [100, 100]).processed %></td>
-    </tr>
+<h1 class="font-title1">Bookmark list</h1>
 
-    <tr>
-      <!--投稿者名-->
-      <th></th>
-      <td>
-        <%= link_to picture.customer.name, public_customer_path(picture.customer.id) %>
-      </td>
-    </tr>
-
-    <tr>
-      <!--タグ-->
-      <th></th>
-      <td>
-        <% picture.tags.each do |tag| %>
-          <%= tag.name %>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr>
-        <!--文章-->
-      <th></th>
-      <td><%= picture.explain %></td>
-    </tr>
-
-    <tr>
-        <!--イラスト-->
-      <th></th>
-      <td>
-        <% picture.post_images.each do | image | %>
-          <%= image_tag image.variant(resize_to_limit: [100, 100]).processed %>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr>
-         <!--いいね-->
-      <th></th>
-      <td>
-        <% if picture.liked_by?(current_customer) %>
-          <%= link_to public_like_path(current_customer.likes.find_by(picture_id: picture.id)), method: :delete do %>
-              ♥<%= picture.likes.count %>
+  <div class="row">
+  <% @bookmarks_pictures.each do |picture| %>
+    <div class="col-4">
+      <div class="card" style="width: 300px; margin-bottom: 5px;">
+        <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+      
+          <!--投稿者のアイコンと名前-->
+          <div style="display: inline-block;">
+          <%= image_tag picture.customer.profile_image.variant(resize_to_limit: [50, 50]).processed, class:"mt-3 rounded-circle bg-primary" %>
+          <%= link_to picture.customer.name, public_customer_path(picture.customer.id) %>
+          </div>
+      
+          <!--投稿イラスト-->
+          <div id="theTarget">
+            <div style="margin: 5px; text-align: center;">
+            <% picture.post_images.each do | image | %>
+              <%= image_tag image.variant(resize_to_limit: [150, 150]).processed %>
             <% end %>
-        <% else %>
-          <%= link_to public_likes_path(picture_id: picture.id), method: :post do %>
-            ♡<%= picture.likes.count %>
-            <% end %>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr>
-      <!--ブックマーク-->
-      <th></th>
-      <td>
-        <% if picture.bookmarked_by?(current_customer) %>
-          <p>
-            <%= link_to public_bookmark_path(current_customer.bookmarks.find_by(picture_id: picture.id)), method: :delete do %>
-              ブックマークを外す
-            <% end %>
-          </p>
-          <% else %>
-          <p>
-            <%= link_to public_bookmarks_path(picture_id: picture.id), method: :post do %>
-              ブックマークに登録する📖
-            <% end %>
-          </p>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr>
-      <th></th>
-      <td><p>コメント件数：<%= picture.comments.count %></p></td>
-    </tr>
-
-    <tr>
-      <th></th>
-          <td><p><%= link_to '詳細', picture %></p></td>
-    </tr>
-
-    <tr>
-      <th></th>
-        <td>
-          <% if current_customer && picture.customer == current_customer || current_admin %>
-          <p><%= link_to '削除', picture, method: :delete %></p>
-          <% end %>
-        </td>
-    </tr>
-    <% end %>
-  </table>
+            </div>
+          </div>
+      
+          <div>
+            <!--文章-->
+            <div style="display: inline-block;"><%= picture.explain %></div>
+        
+            <!--タグ-->
+            <div style="display: inline-block;">
+              <p>
+              <% picture.tags.each do |tag| %>
+                <% if tag.cloud == 0 #手動 %>
+                  #<%= tag.name %>
+                <% else #Cloud API %>
+                <span style="color: black; background-color: lightblue; margin: 3px;">
+                <%= tag.name %>
+                </span>
+                <% end %>
+              <% end %>
+              </p>
+            </div>
+        
+            <div style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
+        
+              <!--いいね-->
+              <div style="display: inline-block;">
+                <div id="like_buttons_<%= picture.id %>">
+                  <%= render "public/likes/like", picture: picture %>
+                </div>
+              </div>
+        
+              <!--ブックマーク-->
+              <div style="display: inline-block;">
+                <div id="bookmark_buttons_<%= picture.id %>">
+                  <%= render "public/bookmarks/bookmark", picture: picture %>
+                </div>
+              </div>
+        
+              <!--コメント-->
+              <div style="display: inline-block;">💬数：<%= picture.comments.count %></div>
+        
+              <div style="display: inline-block;"><%= link_to '詳細', picture, class:"btn btn-primary" %></div>
+        
+            </div>
+          </div>
+      
+        </div>
+      <% end %>
+      </div>
+    </div>
