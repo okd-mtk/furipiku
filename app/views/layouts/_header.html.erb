@@ -3,7 +3,7 @@
 
     <a class="navbar-brand"><%= link_to 'Furipiku', root_path %></a>
     <% if customer_signed_in? %>
-      ようこそ<%= current_customer.name %>さん
+      ようこそ：<%= link_to current_customer.name,public_customer_path(current_customer.id) %>さん
 
     <!--検索-->
     <%= form_tag(pictures_path,:method => 'get') do %>

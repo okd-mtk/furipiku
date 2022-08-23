@@ -7,80 +7,121 @@
 
       <div class="row">
         <% @pictures.each do |picture| %>
-        <div class="col-6">
-          <div class="card" style="width: 280px; margin-bottom: 5px;">
-            <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+          <div class="col-6">
+            <div class="card" style="width: 280px; margin-bottom: 5px;">
+              <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
 
-            <!--投稿者のアイコンと名前-->
-            <div style="display: inline-block;">
-              <%= image_tag picture.customer.profile_image.variant(resize_to_limit: [50, 50]).processed, class:"mt-3 rounded-circle bg-primary" %>
-              <%= link_to picture.customer.name, public_customer_path(picture.customer.id) %>
-            </div>
+                <!--投稿者のアイコンと名前-->
+                <div style="display: inline-block;">
+                  <%= image_tag picture.customer.profile_image.variant(resize_to_limit: [50, 50]).processed, class:"mt-3 rounded-circle bg-primary" %>
+                  <%= link_to picture.customer.name, public_customer_path(picture.customer.id) %>
+                </div>
 
-            <!--イラスト-->
-            <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-            <div class='container-slide'>
-              <div class='single-item'>
-                <% picture.post_images.each do | image | %>
-                  <%= image_tag image.variant(resize_to_limit: [150, 150]).processed %>
-                <% end %>
-              </div>
-            </div>
-
-            <div>
-              <!--文章-->
-              <div style="display: inline-block;"><%= picture.explain %></div>
-
-              <!--タグ-->
-              <div style="display: inline-block;">
-                <p>
-                <% picture.tags.each do |tag| %>
-                  <% if tag.cloud == 0 #手動 %>
-                    #<%= tag.name %>
-                  <% else #Cloud API %>
-                  <span style="color: black; background-color: lightblue; margin: 3px;">
-                  <%= tag.name %>
-                  </span>
+                <!--フォロー-->
+                <div style="display: inline-block;">
+                <% unless current_customer == picture.customer %>
+                  <div id="follow-button-<%= picture.customer.id %>">
+                  <% if current_customer.following?(picture.customer) %>
+                    <%= render 'public/relationships/unfollow_button', customer: picture.customer %>
+                  <% else %>
+                    <%= render 'public/relationships/follow_botton', customer: picture.customer %>
                   <% end %>
+                  </div>
                 <% end %>
-                </p>
-              </div>
-
-              <div style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
-
-              <!--いいね-->
-              <div style="display: inline-block;">
-                <div id="like_buttons_<%= picture.id %>">
-                  <%= render "public/likes/like", picture: picture %>
                 </div>
-              </div>
 
-              <!--ブックマーク-->
-              <div style="display: inline-block;">
-                <div id="bookmark_buttons_<%= picture.id %>">
-                  <%= render "public/bookmarks/bookmark", picture: picture %>
+                <!--イラスト-->
+                <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+                <div class='container-slide'>
+                  <div class='single-item'>
+                    <% picture.post_images.each do | image | %>
+                      <%= image_tag image.variant(resize_to_limit: [150, 150]).processed %>
+                    <% end %>
+                  </div>
                 </div>
+
+                <div>
+
+                  <!--文章-->
+                  <div style="display: inline-block;"><%= picture.explain %></div>
+
+                  <!--タグ-->
+                  <div style="display: inline-block;">
+                    <p>
+                    <% picture.tags.each do |tag| %>
+                      <% if tag.cloud == 0 #手動 %>
+                        #<%= tag.name %>
+                      <% else #Cloud API %>
+                      <span style="color: black; background-color: lightblue; margin: 3px;">
+                      <%= tag.name %>
+                      </span>
+                      <% end %>
+                    <% end %>
+                    </p>
+                  </div>
+
+                  <div style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
+
+                    <!--いいね-->
+                    <div style="display: inline-block;">
+                      <div id="like_buttons_<%= picture.id %>">
+                        <%= render "public/likes/like", picture: picture %>
+                      </div>
+                    </div>
+
+                    <!--ブックマーク-->
+                    <div style="display: inline-block;">
+                      <div id="bookmark_buttons_<%= picture.id %>">
+                        <%= render "public/bookmarks/bookmark", picture: picture %>
+                      </div>
+                    </div>
+
+                    <!--コメント数-->
+                    <div style="display: inline-block;">💬：<%= picture.comments.count %></div>
+
+                    <!--コメント記入-->
+                    <div style="display: inline-block;" id="D-<%= picture.id %>">
+                      <button class="btn btn-outline-dark btn-sm" >comment</button>
+                    </div>
+
+                    <!--削除ボタン-->
+                    <div style="display: inline-block;">
+                      <% if current_customer && picture.customer == current_customer || current_admin %>
+                      <p><%= link_to '🗑', picture, method: :delete, class:"btn btn-danger btn-sm" %></p>
+                      <% end %>
+                    </div>
+
+                    <div id="E-<%= picture.id %>" class="comment-area">
+                      <%= form_with model: @picture_comment, url: public_comments_path, local: true do |f| %>
+                        <%= hidden_field_tag :picture_id, picture.id %>
+                        <%= f.text_area :message, rows: '5', placeholder: "コメントを記入",class:"comment-field" %>
+                        <%= f.submit "送る", class: "btn btn-outline-success btn-sm" %>
+                      <% end %>
+                    </div>
+
+                  </div>
+                </div>
+
+              <!--検索結果0件-->
+              <% if @pictures.blank? %>
+                <div>結果0件</div>
+              <% end %>
+
               </div>
-
-              <!--コメント-->
-              <div style="display: inline-block;">💬数：<%= picture.comments.count %></div>
-
-              <div style="display: inline-block;"><%= link_to '詳細', picture, class:"btn btn-primary" %></div>
-
-              <div style="display: inline-block;">
-                <% if current_customer && picture.customer == current_customer || current_admin %>
-                <p><%= link_to '削除', picture, method: :delete, class:"btn btn-danger" %></p>
-                <% end %>
-              </div>
-              </div>
-            </div>
-
-            <!--検索結果0件-->
-            <% if @pictures.blank? %>
-              <div>結果0件</div>
-            <% end %>
-
             </div>
           </div>
-        </div>
         <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+<% @pictures.each do |picture| %>
+$(function() {
+  $("#D-<%= picture.id %>").click(function() {
+    $("#E-<%= picture.id %>").slideToggle("");
+  });
+});
+<% end %>
+</script>

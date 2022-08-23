@@ -3,6 +3,7 @@
 @import 'navbar';
 @import 'sidebar';
 @import 'slick';
+@import 'click';
 
 
 //ブックマークのタイトル
@@ -18,4 +19,14 @@
 // みんなの投稿のタイトル
 .font-title3 {
   font-family: "Nico Moji";
+}
+
+// コメント記入欄
+.comment-field {
+  width: 100%;
+  height: 60px;
+}
+
+.comment-area {
+  display: none;
 }

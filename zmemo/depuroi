@@ -1,3 +1,5 @@
+※本番環境はmainでプルしてしてくる
+
 ログイン
 ssh -i ~/.ssh/practice-aws.pem ec2-user@18.182.220.150
 
