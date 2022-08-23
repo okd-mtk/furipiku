@@ -13,13 +13,15 @@
           </div>
 
           <!--投稿イラスト-->
-          <div id="theTarget">
-            <div style="margin: 5px; text-align: center;">
-            <% picture.post_images.each do | image | %>
-              <%= image_tag image.variant(resize_to_limit: [150, 150]).processed %>
-            <% end %>
+          <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+            <div class='container-slide'>
+              <div class='single-item'>
+                <% picture.post_images.each do | image | %>
+                  <%= image_tag image.variant(resize_to_limit: [150, 150]).processed %>
+                <% end %>
+              </div>
             </div>
-          </div>
+
 
           <div>
 
@@ -58,9 +60,7 @@
             </div>
 
             <!--コメント-->
-            <div style="display: inline-block;">💬数：<%= picture.comments.count %></div>
-
-            <div style="display: inline-block;"><%= link_to '詳細', picture, class:"btn btn-primary" %></div>
+            <div style="display: inline-block;">💬：<%= picture.comments.count %></div>
 
           </div>
         </div>

@@ -1,13 +1,10 @@
 class Public::PicturesController < ApplicationController
 
   def show
-    @picture = Picture.find(params[:id])
-    @customer = @picture.customer
-    @pictures = @customer.pictures
-    @picture_comment = Comment.new
   end
 
   def index
+    @picture_comment = Comment.new
     if params[:keyword].present?
       keyword = ApplicationRecord.sanitize_sql_like(params[:keyword])
       @pictures = Picture.joins(:tags).where("pictures.explain LIKE ? OR tags.name LIKE ?", "%#{keyword}%", "%#{keyword}%")

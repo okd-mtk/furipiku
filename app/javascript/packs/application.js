@@ -17,3 +17,4 @@ Rails.start()
 ActiveStorage.start()
 
 import "./slick"
+import "./click"
