@@ -8,11 +8,11 @@
     </tr>
   </thead>
   <tbody>
-    <% @tags.each do |tag| %>
+    <% @tags.each_with_index do |tag,i| %>
     <tr>
-      <th scope="row">1</th>
+      <th scope="row"><%= i+1 %></th>
       <td>
-      #<%= tag.name %>
+        #<%= tag.name %>
       </td>
       <td>
       <%= link_to '削除', admin_tag_path(tag.id), method: :delete, class: "btn btn-danger" %>
