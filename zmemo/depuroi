@@ -46,4 +46,3 @@ rails のlogを見る
 
 最新のエラー
 tail -f log/production.log
-
