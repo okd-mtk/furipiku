@@ -40,66 +40,63 @@
                   </div>
                 </div>
 
-                <div>
+                <!--文章-->
+                <div style="display: inline-block;"><%= picture.explain %></div>
 
-                  <!--文章-->
-                  <div style="display: inline-block;"><%= picture.explain %></div>
-
-                  <!--タグ-->
-                  <div style="display: inline-block;">
-                    <p>
-                    <% picture.tags.each do |tag| %>
-                      <% if tag.cloud == 0 #手動 %>
-                        #<%= tag.name %>
-                      <% else #Cloud API %>
-                      <span style="color: black; background-color: lightblue; margin: 3px;">
-                      <%= tag.name %>
-                      </span>
-                      <% end %>
+                <!--タグ-->
+                <div style="display: inline-block;">
+                  <p>
+                  <% picture.tags.each do |tag| %>
+                    <% if tag.cloud == 0 #手動 %>
+                      #<%= tag.name %>
+                    <% else #Cloud API %>
+                    <span style="color: black; background-color: lightblue; margin: 3px;">
+                    <%= tag.name %>
+                    </span>
                     <% end %>
-                    </p>
+                  <% end %>
+                  </p>
+                </div>
+
+                <div style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
+
+                  <!--いいね-->
+                  <div style="display: inline-block;">
+                    <div id="like_buttons_<%= picture.id %>">
+                      <%= render "public/likes/like", picture: picture %>
+                    </div>
                   </div>
 
-                  <div style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
-
-                    <!--いいね-->
-                    <div style="display: inline-block;">
-                      <div id="like_buttons_<%= picture.id %>">
-                        <%= render "public/likes/like", picture: picture %>
-                      </div>
+                  <!--ブックマーク-->
+                  <div style="display: inline-block;">
+                    <div id="bookmark_buttons_<%= picture.id %>">
+                      <%= render "public/bookmarks/bookmark", picture: picture %>
                     </div>
-
-                    <!--ブックマーク-->
-                    <div style="display: inline-block;">
-                      <div id="bookmark_buttons_<%= picture.id %>">
-                        <%= render "public/bookmarks/bookmark", picture: picture %>
-                      </div>
-                    </div>
-
-                    <!--コメント数-->
-                    <div style="display: inline-block;">💬：<%= picture.comments.count %></div>
-
-                    <!--コメント記入-->
-                    <div style="display: inline-block;" id="D-<%= picture.id %>">
-                      <button class="btn btn-outline-dark btn-sm" >comment</button>
-                    </div>
-
-                    <!--削除ボタン-->
-                    <div style="display: inline-block;">
-                      <% if current_customer && picture.customer == current_customer || current_admin %>
-                      <p><%= link_to '🗑', picture, method: :delete, class:"btn btn-danger btn-sm" %></p>
-                      <% end %>
-                    </div>
-
-                    <div id="E-<%= picture.id %>" class="comment-area">
-                      <%= form_with model: @picture_comment, url: public_comments_path, local: true do |f| %>
-                        <%= hidden_field_tag :picture_id, picture.id %>
-                        <%= f.text_area :message, rows: '5', placeholder: "コメントを記入",class:"comment-field" %>
-                        <%= f.submit "送る", class: "btn btn-outline-success btn-sm" %>
-                      <% end %>
-                    </div>
-
                   </div>
+
+                  <!--コメント数-->
+                  <div style="display: inline-block;">💬：<%= picture.comments.count %></div>
+
+                  <!--コメント記入-->
+                  <div style="display: inline-block;" id="D-<%= picture.id %>">
+                    <button class="btn btn-outline-dark btn-sm" >comment</button>
+                  </div>
+
+                  <!--削除ボタン-->
+                  <div style="display: inline-block;">
+                    <% if current_customer && picture.customer == current_customer || current_admin %>
+                    <p><%= link_to '🗑', picture, method: :delete, class:"btn btn-danger btn-sm" %></p>
+                    <% end %>
+                  </div>
+
+                  <div id="E-<%= picture.id %>" class="comment-area">
+                    <%= form_with model: @picture_comment, url: public_comments_path, local: true do |f| %>
+                      <%= hidden_field_tag :picture_id, picture.id %>
+                      <%= f.text_area :message, rows: '5', placeholder: "コメントを記入",class:"comment-field" %>
+                      <%= f.submit "送る", class: "btn btn-outline-success btn-sm" %>
+                    <% end %>
+                  </div>
+
                 </div>
 
               <!--検索結果0件-->

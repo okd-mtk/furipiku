@@ -3,115 +3,121 @@
     <%= render 'public/shared/sidebar', customer: @customer %>
       <div class="col-md-8 offset-md-1">
 
-      <h3><%= @customer.name %>さんの詳細</h3>
-      
-      <table>
-        <tr>
-          <td><%= image_tag @customer.get_profile_image(100,100) %></td>
-        </tr>
-
-        <!--ユーザ名-->
-        <tr>
-          <td><h3><%= @customer.name %></h3></td>
-
-          <!--フォロー-->
-          <td>
-            <% unless current_customer == @customer %>
-              <div id="follow-button-<%= @customer.id %>">
-              <% if current_customer.following?(@customer) %>
-                <%= render 'public/relationships/unfollow_button', customer: @customer %>
-              <% else %>
-                <%= render 'public/relationships/follow_botton', customer: @customer %>
+      <% unless current_customer == @customer %>
+        <h3><%= @customer.name %>さんの詳細</h3>
+  
+        <table>
+          <tr>
+            <td><%= image_tag @customer.get_profile_image(100,100), class:"mt-3 rounded-circle bg-primary" %></td>
+          </tr>
+  
+          <!--ユーザ名-->
+          <tr>
+            <td><h3><%= @customer.name %></h3></td>
+  
+            <!--フォロー-->
+            <td>
+              <% unless current_customer == @customer %>
+                <div id="follow-button-<%= @customer.id %>">
+                <% if current_customer.following?(@customer) %>
+                  <%= render 'public/relationships/unfollow_button', customer: @customer %>
+                <% else %>
+                  <%= render 'public/relationships/follow_botton', customer: @customer %>
+                <% end %>
+                </div>
               <% end %>
+            </td>
+          </tr>
+  
+          <tr>
+            <th>フォロー</th>
+            <td>
+              <div id="followings_count_<%= @customer.id %>">
+              <%= render 'public/relationships/followings_count', customer: @customer %>
               </div>
-            <% end %>
-          </td>
-        </tr>
-
-        <tr>
-          <th>フォロー</th>
-          <td>
-            <div id="followings_count_<%= @customer.id %>">
-            <%= render 'public/relationships/followings_count', customer: @customer %>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <th>フォロワー</th>
-          <td>
-            <div id="follower_count_<%= @customer.id %>">
-            <%= render 'public/relationships/follower_count', customer: @customer %>
-            </div>
-          </td>
-        </tr>
-
-      </table>
-
-      <h2><%= @customer.name %>さんの投稿履歴</h2>
-
-
-      <% if @pictures.blank? %>
-        <div>まだ投稿はありません。</div>
-      <% else %>
-
-        <div class="row">
-          <% @pictures.each do |picture| %>
-          <div class="col-6">
-            <div class="card" style="width: 280px; margin-bottom: 5px;">
-              <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
-
-                <!--イラスト-->
-                <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-                <div class='container-slide'>
-                  <div class='single-item'>
-                    <% picture.post_images.each do | image | %>
-                      <%= image_tag image.variant(resize_to_limit: [150, 150]).processed %>
-                    <% end %>
-                  </div>
-                </div>
+            </td>
+          </tr>
   
-                <!--説明文-->
-                <div style="display: inline-block;"><%= picture.explain %></div>
-  
-                <!--タグ-->
-                <div style="display: inline-block;">
-                  <% picture.tags.each do |tag| %>
-                    <% if tag.cloud == 0 #手動 %>
-                      #<%= tag.name %>
-                    <% else #Cloud API %>
-                    <span style="color: black; background-color: lightblue; margin: 3px;">
-                      <%= tag.name %>
-                    </span>
-                    <% end %>
-                  <% end %>
-                </div>
-  
-                <!--いいね-->
-                <div style="display: inline-block;">
-                  <div id="like_buttons_<%= picture.id %>">
-                    <%= render "public/likes/like", picture: picture %>
-                  </div>
-                </div>
-  
-                <!--ブックマーク-->
-                <div style="display: inline-block;">
-                  <div id="bookmark_buttons_<%= picture.id %>">
-                    <%= render "public/bookmarks/bookmark", picture: picture %>
-                  </div>
-                </div>
-  
-                <div style="display: inline-block;">
-                  <% if current_customer && picture.customer == current_customer || current_admin %>
-                  <p><%= link_to '🗑', picture_path(picture.id), method: :delete, class:"btn btn-danger btm-sm" %></p>
-                  <% end %>
-                </div>
+          <tr>
+            <th>フォロワー</th>
+            <td>
+              <div id="follower_count_<%= @customer.id %>">
+              <%= render 'public/relationships/follower_count', customer: @customer %>
               </div>
-            </div>
-          </div>
-          <% end %>
-        </div>
+            </td>
+          </tr>
+        </table>
       <% end %>
+  
+        <h2><%= @customer.name %>さんの投稿履歴</h2>
+  
+  
+        <% if @pictures.blank? %>
+          <div>まだ投稿はありません。</div>
+        <% else %>
+  
+          <div class="row">
+            <% @pictures.each do |picture| %>
+            <div class="col-6">
+              <div class="card" style="width: 280px; margin-bottom: 5px;">
+                <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+  
+                  <!--イラスト-->
+                  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+                  <div class='container-slide'>
+                    <div class='single-item'>
+                      <% picture.post_images.each do | image | %>
+                        <%= image_tag image.variant(resize_to_limit: [150, 150]).processed %>
+                      <% end %>
+                    </div>
+                  </div>
+  
+                  <!--説明文-->
+                  <div style="display: inline-block;"><%= picture.explain %></div>
+  
+                  <!--タグ-->
+                  <div style="display: inline-block;">
+                    <% picture.tags.each do |tag| %>
+                      <% if tag.cloud == 0 #手動 %>
+                        #<%= tag.name %>
+                      <% else #Cloud API %>
+                      <span style="color: black; background-color: lightblue; margin: 3px;">
+                        <%= tag.name %>
+                      </span>
+                      <% end %>
+                    <% end %>
+                  </div>
+  
+                  <div style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
+                    
+                    <!--いいね-->
+                    <div style="display: inline-block;">
+                      <div id="like_buttons_<%= picture.id %>">
+                        <%= render "public/likes/like", picture: picture %>
+                      </div>
+                    </div>
+  
+                    <!--ブックマーク-->
+                    <div style="display: inline-block;">
+                      <div id="bookmark_buttons_<%= picture.id %>">
+                        <%= render "public/bookmarks/bookmark", picture: picture %>
+                      </div>
+                    </div>
+                    
+                    <!--削除ボタン-->
+                    <div style="display: inline-block;">
+                      <% if current_customer && picture.customer == current_customer || current_admin %>
+                      <p><%= link_to '🗑', picture_path(picture.id), method: :delete, class:"btn btn-danger btm-sm" %></p>
+                      <% end %>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

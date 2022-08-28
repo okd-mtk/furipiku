@@ -1,6 +1,8 @@
-<h4>本当に退会しますか？</h4>
-<p>退会すると、会員情報や</p>
-<p>これまでの投稿履歴が閲覧できなくなります。</p>
-<p>退会する場合は、「退会する」をクリックしてください。</p>
-<li><%= link_to '退会しない', public_customer_path(current_customer) %></li>
-<li><%= link_to '退会する', public_withdrawal_path %></li>
+<div style="text-align: center;">
+  <h4>本当に退会しますか？</h4>
+  <p>退会すると、会員情報や</p>
+  <p>これまでの投稿履歴が閲覧できなくなります。</p>
+  <p>退会する場合は、「退会する」をクリックしてください。</p>
+  <%= link_to '退会しない', public_customer_path(current_customer), class: 'btn btn-primary' %>
+  <%= link_to '退会する', public_withdrawal_path, class: 'btn btn-danger', method: :patch %>
+</div>
