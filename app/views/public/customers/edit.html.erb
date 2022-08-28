@@ -1,8 +1,6 @@
-<div class="container">
-
-  <h1>会員情報の編集</h1>
+  <h1 style="text-align: center;">会員情報の編集</h1>
     <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch do |f| %>
-    <table>
+    <table style="margin-left: auto; margin-right: auto;">
       <tr>
         <th>プロフィール写真</th>
         <td><%= f.file_field :profile_image, accept: "image/*" %></td>
@@ -29,4 +27,3 @@
 
     </table>
     <% end %>
-  </div>
